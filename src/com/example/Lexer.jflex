@@ -8,31 +8,16 @@ import java_cup.runtime.*;
 %cup
 %line
 %column
-%unicode
-%{
-    // For better error reporting
-    private Symbol symbol(int type) {
-        return new Symbol(type, yyline, yycolumn);
-    }
-    
-    private Symbol symbol(int type, Object value) {
-        return new Symbol(type, yyline, yycolumn, value);
-    }
-%}
-
-// Define commonly used patterns
-Number = [0-9]+
-Whitespace = [ \t\r\n\f]
 
 %%
 
-{Number}        { return symbol(sym.NUMBER, Integer.valueOf(yytext())); }
-"+"             { return symbol(sym.PLUS); }
-"-"             { return symbol(sym.MINUS); }
-"*"             { return symbol(sym.TIMES); }
-"/"             { return symbol(sym.DIVIDE); }
-"("             { return symbol(sym.LPAREN); }
-")"             { return symbol(sym.RPAREN); }
-{Whitespace}+   { /* ignore whitespace */ }
-.               { throw new Error("Illegal character '" + yytext() + "' at line " + (yyline+1) + ", column " + (yycolumn+1)); }
-<<EOF>>         { return symbol(sym.EOF); }
+[0-9]+          { return new Symbol(sym.NUMBER, Integer.parseInt(yytext())); }
+"+"             { return new Symbol(sym.PLUS); }
+"-"             { return new Symbol(sym.MINUS); }
+"*"             { return new Symbol(sym.TIMES); }
+"/"             { return new Symbol(sym.DIVIDE); }
+"("             { return new Symbol(sym.LPAREN); }
+")"             { return new Symbol(sym.RPAREN); }
+[ \t\r\n]+      { /* ignore whitespace */ }
+.               { System.err.println("Illegal character: " + yytext()); }
+<<EOF>>         { return new Symbol(sym.EOF); }
