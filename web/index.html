@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Expression Calculator</h1>
+        
+        <div class="calculator">
+            <div class="display">
+                <input type="text" id="expression" placeholder="Enter expression..." autocomplete="off">
+            </div>
+            
+            <div class="result" id="result">
+                Result: <span id="result-value">0</span>
+            </div>
+            
+            <div class="keypad">
+                <div class="row">
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key operator" data-value="/">/</button>
+                </div>
+                
+                <div class="row">
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key operator" data-value="*">*</button>
+                </div>
+                
+                <div class="row">
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key operator" data-value="-">-</button>
+                </div>
+                
+                <div class="row">
+                    <button class="key number" data-value="0">0</button>
+                    <button class="key parenthesis" data-value="(">(</button>
+                    <button class="key parenthesis" data-value=")">)</button>
+                    <button class="key operator" data-value="+">+</button>
+                </div>
+                
+                <div class="row">
+                    <button class="key clear" id="clear">C</button>
+                    <button class="key backspace" id="backspace">⌫</button>
+                    <button class="key equals" id="calculate">=</button>
+                </div>
+            </div>
+            
+            <div class="history-container">
+                <h3>History</h3>
+                <div class="history" id="history"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by JFlex and CUP Parser</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

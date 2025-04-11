@@ -1,0 +1,101 @@
+package com.example;
+
+import java_cup.runtime.*;
+import java.util.Stack;
+
+parser code {:
+    // Improved error reporting
+    public void report_error(String message, Object info) {
+        StringBuilder errorMsg = new StringBuilder("Error");
+        
+        if (info instanceof java_cup.runtime.Symbol) {
+            java_cup.runtime.Symbol s = (java_cup.runtime.Symbol) info;
+            if (s.left >= 0) {
+                errorMsg.append(" at position ").append(s.left);
+                if (s.right >= 0) {
+                    errorMsg.append("-").append(s.right);
+                }
+            }
+        }
+        errorMsg.append(": ").append(message);
+        
+        System.err.println(errorMsg);
+    }
+    
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        throw new RuntimeException("Fatal syntax error");
+    }
+    
+    // Track expression complexity to optimize large expressions
+    private int expressionDepth = 0;
+    private static final int MAX_DEPTH = 1000;
+    
+    // Method to check for stack overflow prevention
+    private void checkExpressionDepth() throws Exception {
+        expressionDepth++;
+        if (expressionDepth > MAX_DEPTH) {
+            throw new Exception("Expression too complex - maximum depth exceeded");
+        }
+    }
+    
+    private void reduceExpressionDepth() {
+        expressionDepth--;
+    }
+:}
+
+// Terminal and non-terminal symbols
+terminal Integer NUMBER;
+terminal PLUS, MINUS, TIMES, DIVIDE, LPAREN, RPAREN;
+non terminal Integer expression, term, factor;
+
+// Precedence declarations
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence right UMINUS; // Add unary minus support
+
+start with expression;
+
+expression ::= 
+    term:t                       
+    {: RESULT = t; :}
+    | expression:e PLUS term:t   
+    {: 
+        parser.checkExpressionDepth();
+        RESULT = e + t; 
+        parser.reduceExpressionDepth();
+    :}
+    | expression:e MINUS term:t  
+    {: 
+        parser.checkExpressionDepth();
+        RESULT = e - t; 
+        parser.reduceExpressionDepth();
+    :}
+;
+
+term ::= 
+    factor:f                     
+    {: RESULT = f; :}
+    | term:t TIMES factor:f      
+    {: 
+        parser.checkExpressionDepth();
+        RESULT = t * f; 
+        parser.reduceExpressionDepth();
+    :}
+    | term:t DIVIDE factor:f     
+    {: 
+        parser.checkExpressionDepth();
+        if (f == 0) throw new ArithmeticException("Division by zero");
+        RESULT = t / f; 
+        parser.reduceExpressionDepth();
+    :}
+;
+
+factor ::= 
+    NUMBER:n                   
+    {: RESULT = n; :}
+    | LPAREN expression:e RPAREN 
+    {: RESULT = e; :}
+    | MINUS factor:f             
+    {: RESULT = -f; :} %prec UMINUS
+;
