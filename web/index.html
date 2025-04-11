@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A futuristic expression calculator with history tracking." />
+  <title>Futuristic Expression Calculator</title>
+  
+  <!-- Orbitron Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Expression Calculator</h1>
-        
-        <div class="calculator">
-            <div class="display">
-                <input type="text" id="expression" placeholder="Enter expression..." autocomplete="off">
-            </div>
-            
-            <div class="result" id="result">
-                Result: <span id="result-value">0</span>
-            </div>
-            
-            <div class="keypad">
-                <div class="row">
-                    <button class="key number" data-value="7">7</button>
-                    <button class="key number" data-value="8">8</button>
-                    <button class="key number" data-value="9">9</button>
-                    <button class="key operator" data-value="/">/</button>
-                </div>
-                
-                <div class="row">
-                    <button class="key number" data-value="4">4</button>
-                    <button class="key number" data-value="5">5</button>
-                    <button class="key number" data-value="6">6</button>
-                    <button class="key operator" data-value="*">*</button>
-                </div>
-                
-                <div class="row">
-                    <button class="key number" data-value="1">1</button>
-                    <button class="key number" data-value="2">2</button>
-                    <button class="key number" data-value="3">3</button>
-                    <button class="key operator" data-value="-">-</button>
-                </div>
-                
-                <div class="row">
-                    <button class="key number" data-value="0">0</button>
-                    <button class="key parenthesis" data-value="(">(</button>
-                    <button class="key parenthesis" data-value=")">)</button>
-                    <button class="key operator" data-value="+">+</button>
-                </div>
-                
-                <div class="row">
-                    <button class="key clear" id="clear">C</button>
-                    <button class="key backspace" id="backspace">⌫</button>
-                    <button class="key equals" id="calculate">=</button>
-                </div>
-            </div>
-            
-            <div class="history-container">
-                <h3>History</h3>
-                <div class="history" id="history"></div>
-            </div>
+  <div class="calculator-container">
+    <h1>Futuristic Calculator</h1>
+
+    <div class="calculator" role="application">
+      <div class="display">
+        <input
+          type="text"
+          id="expression"
+          placeholder="Enter expression..."
+          autocomplete="off"
+          aria-label="Expression input"
+        />
+      </div>
+
+      <div class="result" id="result">
+        Result: <span id="result-value">0</span>
+      </div>
+
+      <div class="keypad" role="grid">
+        <div class="row">
+          <button class="key number" data-value="7" aria-label="Number 7">7</button>
+          <button class="key number" data-value="8" aria-label="Number 8">8</button>
+          <button class="key number" data-value="9" aria-label="Number 9">9</button>
+          <button class="key operator" data-value="/" aria-label="Divide">/</button>
         </div>
-        
-        <div class="footer">
-            <p>Powered by JFlex and CUP Parser</p>
+
+        <div class="row">
+          <button class="key number" data-value="4" aria-label="Number 4">4</button>
+          <button class="key number" data-value="5" aria-label="Number 5">5</button>
+          <button class="key number" data-value="6" aria-label="Number 6">6</button>
+          <button class="key operator" data-value="*" aria-label="Multiply">*</button>
         </div>
+
+        <div class="row">
+          <button class="key number" data-value="1" aria-label="Number 1">1</button>
+          <button class="key number" data-value="2" aria-label="Number 2">2</button>
+          <button class="key number" data-value="3" aria-label="Number 3">3</button>
+          <button class="key operator" data-value="-" aria-label="Subtract">-</button>
+        </div>
+
+        <div class="row">
+          <button class="key number" data-value="0" aria-label="Number 0">0</button>
+          <button class="key parenthesis" data-value="(" aria-label="Left parenthesis">(</button>
+          <button class="key parenthesis" data-value=")" aria-label="Right parenthesis">)</button>
+          <button class="key operator" data-value="+" aria-label="Add">+</button>
+        </div>
+
+        <div class="row">
+          <button class="key clear" id="clear" aria-label="Clear">C</button>
+          <button class="key backspace" id="backspace" aria-label="Backspace">⌫</button>
+          <button class="key equals" id="calculate" aria-label="Calculate">
+            <span class="equals-text">=</span>
+            <span class="spinner" style="display: none;">⏳</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="history-container">
+        <h3>Calculation History</h3>
+        <div class="history" id="history" role="log" aria-live="polite"></div>
+      </div>
     </div>
-    
-    <script src="script.js"></script>
+
+    <div class="footer">
+      <p>Powered by JFlex and CUP Parser</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

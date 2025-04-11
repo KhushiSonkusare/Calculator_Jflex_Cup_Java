@@ -1,176 +1,307 @@
+/* ----------------------------------
+   GLOBAL STYLES
+------------------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f5f5f5;
+  }
+  
+  body {
+    font-family: "Orbitron", sans-serif;
+    background: radial-gradient(circle at center, #f1f5f9 0%, #d1d9e0 100%); /* Subtle radial gradient for depth */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-}
-
-.calculator-container {
-    width: 100%;
-    max-width: 500px;
-}
-
-h1 {
+    color: #2d3748; /* Slightly warmer dark gray for text */
+  }
+  
+  /* ----------------------------------
+     HEADINGS
+  ------------------------------------- */
+  h1 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.calculator {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.display {
-    margin-bottom: 15px;
-}
-
-.display input {
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: #1a202c; /* Deep charcoal for elegance */
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* ----------------------------------
+     MAIN CONTAINER
+  ------------------------------------- */
+  .calculator-container {
     width: 100%;
-    padding: 15px;
-    font-size: 24px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    max-width: 440px;
+  }
+  
+  /* ----------------------------------
+     CALCULATOR CARD
+  ------------------------------------- */
+  .calculator {
+    background: linear-gradient(145deg, #ffffff, #e2e8f0); /* Soft gradient for depth */
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* ----------------------------------
+     DISPLAY
+  ------------------------------------- */
+  .display {
+    margin-bottom: 20px;
+  }
+  
+  .display input {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.4rem;
+    text-align: right;
+    border: none;
+    border-radius: 12px;
     outline: none;
+    background: #2d3748; /* Rich dark gray for contrast */
+    color: #f7fafc; /* Off-white for readability */
+    font-family: "Orbitron", sans-serif;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .display input:focus {
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(59, 130, 246, 0.3);
+    background: #374151;
+  }
+  
+  .display input::placeholder {
+    color: #a0aec0; /* Soft gray for placeholder */
+  }
+  
+  /* ----------------------------------
+     RESULT
+  ------------------------------------- */
+  .result {
+    margin-bottom: 24px;
+    background: linear-gradient(145deg, #edf2f7, #d1d9e0); /* Subtle gradient */
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 1.2rem;
     text-align: right;
-}
-
-.display input:focus {
-    border-color: #0077ff;
-}
-
-.result {
-    background-color: #f0f8ff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    text-align: right;
-}
-
-#result-value {
-    font-weight: bold;
-    color: #0077ff;
-}
-
-.keypad {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+    color: #1a202c;
+  }
+  
+  #result-value {
+    font-weight: 700;
+    color: #2b6cb0; /* Muted blue for emphasis */
+  }
+  
+  /* ----------------------------------
+     KEYPAD
+  ------------------------------------- */
+  .keypad {
     display: grid;
-    grid-gap: 10px;
-    margin-bottom: 20px;
-}
-
-.row {
+    gap: 12px;
+  }
+  
+  /* ----------------------------------
+     ROW
+  ------------------------------------- */
+  .row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-}
-
-.key {
-    padding: 15px;
-    font-size: 20px;
+    gap: 12px;
+  }
+  
+  /* ----------------------------------
+     KEYS (BUTTONS)
+  ------------------------------------- */
+  .key {
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.2s;
-    background-color: #f0f0f0;
-}
-
-.key:hover {
-    background-color: #e0e0e0;
-}
-
-.key:active {
+    font-family: "Orbitron", sans-serif;
+    background: linear-gradient(145deg, #f7fafc, #e2e8f0); /* Soft gradient for buttons */
+    color: #2d3748;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .key:hover {
+    background: linear-gradient(145deg, #e2e8f0, #cbd5e0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .key:active {
     transform: scale(0.95);
-}
-
-.number {
-    background-color: #fff;
-    border: 1px solid #ddd;
-}
-
-.operator {
-    background-color: #ffcc00;
-    color: #333;
-}
-
-.parenthesis {
-    background-color: #f0f0f0;
-}
-
-.equals {
-    background-color: #0077ff;
-    color: white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Ripple effect on click */
+  .key::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  
+  .key:active::after {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Button Types */
+  .number {
+    background: linear-gradient(145deg, #f7fafc, #e2e8f0);
+  }
+  
+  .operator {
+    background: linear-gradient(145deg, #4a5568, #2d3748); /* Muted slate for operators */
+    color: #f7fafc;
+  }
+  
+  .parenthesis {
+    background: linear-gradient(145deg, #a0aec0, #7c8a9e); /* Soft gray-blue */
+    color: #1a202c;
+  }
+  
+  .equals {
+    background: linear-gradient(145deg, #2b6cb0, #1a4971); /* Rich blue for equals */
+    color: #ffffff;
     grid-column: span 2;
-}
-
-.clear {
-    background-color: #ff3b30;
-    color: white;
-}
-
-.backspace {
-    background-color: #ff9500;
-    color: white;
-}
-
-.history-container {
-    margin-top: 20px;
-    border-top: 1px solid #eee;
-    padding-top: 15px;
-}
-
-.history-container h3 {
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.history {
-    max-height: 200px;
+    font-weight: 700;
+  }
+  
+  /* Special Keys */
+  .clear {
+    background: linear-gradient(145deg, #e53e3e, #c53030); /* Subtle red */
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .backspace {
+    background: linear-gradient(145deg, #ed8936, #c05621); /* Warm orange */
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  /* ----------------------------------
+     HISTORY SECTION
+  ------------------------------------- */
+  .history-container {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  .history-container h3 {
+    margin-bottom: 12px;
+    color: #1a202c;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  
+  .history {
+    max-height: 220px;
     overflow-y: auto;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.history-item {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-}
-
-.history-item:last-child {
-    border-bottom: none;
-}
-
-.footer {
+    border-radius: 12px;
+    padding: 15px;
+    background: #f7fafc; /* Clean off-white */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-item {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #edf2f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    color: #2d3748;
+  }
+  
+  .history-item:hover {
+    background: #e2e8f0;
+    transform: translateX(3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* ----------------------------------
+     FOOTER
+  ------------------------------------- */
+  .footer {
     text-align: center;
-    margin-top: 20px;
-    color: #777;
-    font-size: 14px;
-}
-
-@media (max-width: 480px) {
+    margin-top: 24px;
+    color: #4a5568; /* Slightly warmer gray */
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  
+  /* ----------------------------------
+     RESPONSIVE
+  ------------------------------------- */
+  @media (max-width: 480px) {
+    .calculator-container {
+      max-width: 100%;
+      padding: 12px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  
     .calculator {
-        padding: 15px;
+      padding: 18px;
+      border-radius: 16px;
     }
-    
+  
     .display input {
-        font-size: 20px;
-        padding: 12px;
+      font-size: 1.2rem;
+      padding: 14px;
     }
-    
+  
+    .result {
+      font-size: 1.1rem;
+      padding: 12px 14px;
+    }
+  
     .key {
-        padding: 12px;
-        font-size: 18px;
+      padding: 14px;
+      font-size: 1.1rem;
     }
-}
+  
+    .row {
+      gap: 10px;
+    }
+  
+    .history {
+      padding: 12px;
+    }
+  
+    .history-item {
+      padding: 8px 10px;
+    }
+  }
